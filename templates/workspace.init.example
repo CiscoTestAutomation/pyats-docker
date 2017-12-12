@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# This is an example workspace.init file that you can volume mount in docker
+# into your pyATS container's workspace. Inside here you can perform various 
+# setups (outside of pip requirements.txt), such as:
+#   - adding known ssh hosts into known_hosts using ssh-keyscan
+#   - cloning git repositories 
+#   - setting up python packages/source code into development mode
+#   - etc
+
+set -e
+
+# trust & store github's ssh key
+ssh-keyscan github.com >> ~/.ssh/known_hosts 2> /dev/null
+
+# clone a github repo over https
+# eg, Cisco YDK
+git clone https://github.com/CiscoDevNet/ydk-py.git
+
+# set package into development mode
+cd ${WORKSPACE}/ydk-py/core
+python setup.py develop
