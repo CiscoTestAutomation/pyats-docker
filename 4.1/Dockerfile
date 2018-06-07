@@ -32,7 +32,8 @@ RUN pip3 install --no-cache-dir pyats==${PYATS_VERSION} genie==${GENIE_VERSION}
 RUN virtualenv --system-site-packages ${WORKSPACE} \
  && mkdir ${WORKSPACE}/users && chmod 775 ${WORKSPACE}/users \
  && ln -s /usr/local/examples ${WORKSPACE}/examples \
- && ln -s /usr/local/templates ${WORKSPACE}/templates
+ && ln -s /usr/local/templates ${WORKSPACE}/templates \
+ && ln -s /usr/local/genie_yamls ${WORKSPACE}/genie_yamls
 
 # declare workspace as a volume to
 # persist through image upgrades
