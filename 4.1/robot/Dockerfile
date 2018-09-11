@@ -11,7 +11,7 @@ RUN apt-get update \
 ARG WORKSPACE
 ENV WORKSPACE ${WORKSPACE:-/pyats}
 
-# use tini as subreaper in Docker container to adopt zombie processes 
+# use tini as subreaper in Docker container to adopt zombie processes
 ENV TINI_VERSION 0.15.0
 RUN curl -fsSL https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini-static-amd64 -o /bin/tini && chmod +x /bin/tini
 
@@ -21,8 +21,8 @@ RUN pip3 install --upgrade --no-cache-dir setuptools pip virtualenv
 # version definitions
 ARG PYATS_VERSION=4.1.0
 ARG PYATS_ROBOT_VERSION=4.1.1
-ARG GENIE_VERSION=3.0.0
-ARG GENIE_ROBOT_VERSION=3.0.7
+ARG GENIE_VERSION=3.0.7
+ARG GENIE_ROBOT_VERSION=3.0.8
 
 # install pyats into system python
 RUN pip3 install --no-cache-dir pyats==${PYATS_VERSION} genie==${GENIE_VERSION}
