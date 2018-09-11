@@ -21,11 +21,14 @@ RUN pip3 install --upgrade --no-cache-dir setuptools pip virtualenv
 # version definitions
 ARG PYATS_VERSION=4.1.0
 ARG PYATS_ROBOT_VERSION=4.1.1
-ARG GENIE_VERSION=3.0.7
+ARG GENIE_VERSION=3.0.0
+ARG GENIE_PARSER_VERSION=3.0.7
 ARG GENIE_ROBOT_VERSION=3.0.8
 
 # install pyats into system python
-RUN pip3 install --no-cache-dir pyats==${PYATS_VERSION} genie==${GENIE_VERSION}
+RUN pip3 install --no-cache-dir pyats==${PYATS_VERSION} \
+                                genie==${GENIE_VERSION} \
+                                genie.libs.parser==${GENIE_PARSER_VERSION}
 
 # install robot
 RUN pip3 install --no-cache-dir pyats.robot==${PYATS_ROBOT_VERSION} \
