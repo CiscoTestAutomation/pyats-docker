@@ -19,7 +19,7 @@ RUN curl -fsSL https://github.com/krallin/tini/releases/download/v${TINI_VERSION
 RUN pip3 install --upgrade --no-cache-dir setuptools pip virtualenv
 
 # version definitions
-ARG PYATS_VERSION=5.0.0
+ARG PYATS_VERSION=5.0.1
 ARG GENIE_VERSION=3.1.0
 
 # install pyats into system python
