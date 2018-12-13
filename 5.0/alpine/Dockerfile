@@ -7,7 +7,8 @@ RUN apk add python3 \
             gcc \
             linux-headers \
             musl-dev \
-            busybox-extras
+            busybox-extras \
+            openssh-client
 
 # workspace location
 ARG WORKSPACE
