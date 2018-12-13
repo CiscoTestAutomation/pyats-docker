@@ -6,7 +6,8 @@ RUN apk add python3 \
             python3-dev \
             gcc \
             linux-headers \
-            musl-dev
+            musl-dev \
+            busybox-extras
 
 # workspace location
 ARG WORKSPACE
