@@ -22,7 +22,7 @@ RUN pip3 install --upgrade --no-cache-dir setuptools pip virtualenv
 ARG PYATS_VERSION=5.0.1
 ARG PYATS_ROBOT_VERSION=5.0.0
 ARG GENIE_VERSION=3.1.0
-ARG GENIE_ROBOT_VERSION=3.1.0
+ARG GENIE_ROBOT_VERSION=3.1.6
 
 # install pyats into system python
 RUN pip3 install --no-cache-dir pyats==${PYATS_VERSION} genie==${GENIE_VERSION}
