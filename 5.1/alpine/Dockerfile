@@ -8,7 +8,9 @@ RUN apk add python3 \
             linux-headers \
             musl-dev \
             busybox-extras \
-            openssh-client
+            openssh-client \
+            libffi-dev \
+            openssl-dev
 
 # workspace location
 ARG WORKSPACE
@@ -17,8 +19,12 @@ ENV WORKSPACE ${WORKSPACE:-/pyats}
 # copy wheel files into repo
 ADD src /src
 
+# upgrade system pip
+# (otherwise some dependencies will fail to install)
+RUN pip3 install --upgrade pip
+
 # install pyats into system python
-RUN pip3 install --no-cache-dir /src/*
+RUN pip3 install --no-use-pep517 --no-cache-dir /src/*
 
 # create virtual environment
 #  - preserve system package usage
