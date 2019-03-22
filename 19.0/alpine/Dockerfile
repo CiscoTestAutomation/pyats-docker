@@ -11,9 +11,8 @@ ADD src /src
 # 1. install common tools
 # 2. install build dependencies
 # 3. create virtual environment
-#    - preserve system package usage
+#    - install pyats
 #    - create user directory
-#    - symlink examples & templates to workspace
 #    - delete added unwanted files
 # 4. cleanup
 RUN apk add --no-cache busybox-extras openssh-client \
@@ -42,13 +41,10 @@ RUN apk add --no-cache busybox-extras openssh-client \
 		util-linux-dev \
 		xz-dev \
 		zlib-dev \
- && pip3 install --no-cache-dir --no-use-pep517 /src/* \
- && python3 -m venv --system-site-packages ${WORKSPACE} \
+ && python3 -m venv ${WORKSPACE} \
  && ${WORKSPACE}/bin/pip install --no-cache-dir --upgrade pip setuptools \
+ && ${WORKSPACE}/bin/pip install --no-cache-dir --no-use-pep517 /src/* \
  && mkdir ${WORKSPACE}/users && chmod 775 ${WORKSPACE}/users \
- && ln -s /usr/local/examples ${WORKSPACE}/examples \
- && ln -s /usr/local/templates ${WORKSPACE}/templates \
- && ln -s /usr/local/genie_yamls ${WORKSPACE}/genie_yamls \
  && rm -rf /src \
  && apk del .build-deps
 
