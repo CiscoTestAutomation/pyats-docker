@@ -1,3 +1,5 @@
+[![published](https://static.production.devnetcloud.com/codeexchange/assets/images/devnet-published.svg)](https://developer.cisco.com/codeexchange/github/repo/CiscoTestAutomation/pyats-docker)
+
 # pyATS Dockerfile and Scripts
 
 This is the Git repo for the official pyATS test framework Docker image. This 
