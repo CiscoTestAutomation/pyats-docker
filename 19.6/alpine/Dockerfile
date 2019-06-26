@@ -43,7 +43,7 @@ RUN apk add --no-cache busybox-extras openssh-client \
 		zlib-dev \
  && python3 -m venv ${WORKSPACE} \
  && ${WORKSPACE}/bin/pip install --no-cache-dir --upgrade pip setuptools \
- && ${WORKSPACE}/bin/pip install --no-cache-dir --no-use-pep517 /src/* \
+ && ${WORKSPACE}/bin/pip install --no-cache-dir /src/* \
  && mkdir ${WORKSPACE}/users && chmod 775 ${WORKSPACE}/users \
  && rm -rf /src \
  && apk del .build-deps
