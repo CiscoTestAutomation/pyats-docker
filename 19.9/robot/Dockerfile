@@ -26,9 +26,9 @@ RUN apt-get update \
  && chmod +x /bin/tini \
  && pip3 install --upgrade --no-cache-dir setuptools pip virtualenv \
  && virtualenv ${WORKSPACE} \
- && ${WORKSPACE}/bin/pip install --no-cache-dir pyats==${PYATS_VERSION} genie==${GENIE_VERSION} \
- && ${WORKSPACE}/bin/pip install --no-cache-dir pyats.robot==${PYATS_ROBOT_VERSION} \
-                                                genie.libs.robot==${GENIE_ROBOT_VERSION} \
+ && ${WORKSPACE}/bin/pip install --no-cache-dir pyats>=${PYATS_VERSION} genie>=${GENIE_VERSION} \
+ && ${WORKSPACE}/bin/pip install --no-cache-dir pyats.robot>=${PYATS_ROBOT_VERSION} \
+                                                genie.libs.robot>=${GENIE_ROBOT_VERSION} \
                                                 unicon[robot] \
  && mkdir ${WORKSPACE}/users && chmod 775 ${WORKSPACE}/users \
  && apt-get remove -y curl build-essential\
