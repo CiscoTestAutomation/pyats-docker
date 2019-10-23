@@ -48,10 +48,6 @@ RUN apk add --no-cache busybox-extras openssh-client \
  && rm -rf /src \
  && apk del .build-deps
 
-# declare workspace as a volume to
-# persist through image upgrades
-VOLUME ${WORKSPACE}
-
 # modify entrypoint
 COPY docker-entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]

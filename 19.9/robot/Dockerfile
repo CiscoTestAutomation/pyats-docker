@@ -37,10 +37,6 @@ RUN apt-get update \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-# declare workspace as a volume to
-# persist through image upgrades
-VOLUME ${WORKSPACE}
-
 # modify entrypoint
 COPY docker-entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/bin/tini", "--", "/entrypoint.sh"]
