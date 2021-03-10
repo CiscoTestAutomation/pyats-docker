@@ -5,6 +5,9 @@ MAINTAINER pyATS Support <pyats-support-ext@cisco.com>
 ARG WORKSPACE
 ENV WORKSPACE ${WORKSPACE:-/pyats}
 
+# version definitions
+ARG PYATS_VERSION=21.2
+
 # copy wheel files into this container
 ADD src /src
 
