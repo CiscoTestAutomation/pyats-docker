@@ -6,7 +6,7 @@ ARG WORKSPACE
 ENV WORKSPACE ${WORKSPACE:-/pyats}
 
 # version definitions
-ARG PYATS_VERSION=21.2
+ARG PYATS_VERSION=21.3
 
 # copy wheel files into this container
 ADD src /src
