@@ -23,6 +23,7 @@ RUN apt-get update \
  && chmod +x /bin/tini \
  && pip3 install --upgrade --no-cache-dir setuptools pip virtualenv \
  && virtualenv ${WORKSPACE} \
+ && ${WORKSPACE}/bin/pip install --no-cache-dir --upgrade pip setuptools wheel \
  && ${WORKSPACE}/bin/pip install --no-cache-dir pyats[full]~=${PYATS_VERSION}.0 rest.connector~=${PYATS_VERSION}.0 yang.connector~=${PYATS_VERSION}.0 \
  && mkdir ${WORKSPACE}/users && chmod 775 ${WORKSPACE}/users \
  && apt-get remove -y curl build-essential\
