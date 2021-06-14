@@ -45,7 +45,7 @@ RUN apk add --no-cache busybox-extras openssh-client \
 		xz-dev \
 		zlib-dev \
  && python3 -m venv ${WORKSPACE} \
- && ${WORKSPACE}/bin/pip install --no-cache-dir --upgrade pip setuptools \
+ && ${WORKSPACE}/bin/pip install --no-cache-dir --upgrade pip setuptools wheel \
  && PYATS_WHL=`ls /src/pyats-* | head -n 1` \
  && ${WORKSPACE}/bin/pip install --no-cache-dir "$PYATS_WHL[full]" /src/* \
  && mkdir ${WORKSPACE}/users && chmod 775 ${WORKSPACE}/users \

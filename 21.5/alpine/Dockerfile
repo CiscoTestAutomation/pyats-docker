@@ -45,7 +45,7 @@ RUN apk add --no-cache busybox-extras openssh-client \
 		xz-dev \
 		zlib-dev \
  && python3 -m venv ${WORKSPACE} \
- && ${WORKSPACE}/bin/pip install --no-cache-dir --upgrade pip setuptools \
+ && ${WORKSPACE}/bin/pip install --no-cache-dir --upgrade pip setuptools wheel \
  && ${WORKSPACE}/bin/pip install --no-cache-dir /src/* \
  && mkdir ${WORKSPACE}/users && chmod 775 ${WORKSPACE}/users \
  && rm -rf /src \
