@@ -19,7 +19,6 @@ ADD src /src
 #    - delete added unwanted files
 # 4. cleanup
 RUN apk add --no-cache busybox-extras openssh-client \
- && apk add --no-cache libressl-dev musl-dev rust cargo \
  && apk add --no-cache --virtual .build-deps  \
 		bzip2-dev \
 		coreutils \
@@ -29,6 +28,7 @@ RUN apk add --no-cache busybox-extras openssh-client \
 		gcc \
 		gdbm-dev \
 		libc-dev \
+		libressl-dev musl-dev rust cargo \
 		libffi-dev \
 		libnsl-dev \
 		libtirpc-dev \
