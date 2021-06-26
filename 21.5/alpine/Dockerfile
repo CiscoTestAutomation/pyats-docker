@@ -53,7 +53,8 @@ RUN apk add --no-cache busybox-extras openssh-client \
  && ${WORKSPACE}/bin/pip install --no-cache-dir /src/* \
  && mkdir ${WORKSPACE}/users && chmod 775 ${WORKSPACE}/users \
  && rm -rf /src \
- && apk del .build-deps
+ && apk del .build-deps \
+ && rm -rf ~/.cargo
 
 # modify entrypoint
 COPY docker-entrypoint.sh /entrypoint.sh

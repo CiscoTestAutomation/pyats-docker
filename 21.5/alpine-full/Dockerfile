@@ -21,6 +21,7 @@ ADD src /src
 RUN apk add --no-cache busybox-extras openssh-client \
  && apk add --no-cache --virtual .build-deps  \
 		bzip2-dev \
+		cargo \
 		coreutils \
 		dpkg-dev dpkg \
 		expat-dev \
@@ -28,15 +29,18 @@ RUN apk add --no-cache busybox-extras openssh-client \
 		gcc \
 		gdbm-dev \
 		libc-dev \
+		libressl-dev \
 		libffi-dev \
 		libnsl-dev \
 		libtirpc-dev \
 		linux-headers \
 		make \
+		musl-dev \
 		ncurses-dev \
 		openssl-dev \
 		pax-utils \
 		readline-dev \
+		rust \
 		sqlite-dev \
 		tcl-dev \
 		tk \
@@ -50,7 +54,8 @@ RUN apk add --no-cache busybox-extras openssh-client \
  && ${WORKSPACE}/bin/pip install --no-cache-dir "$PYATS_WHL[full]" /src/* \
  && mkdir ${WORKSPACE}/users && chmod 775 ${WORKSPACE}/users \
  && rm -rf /src \
- && apk del .build-deps
+ && apk del .build-deps \
+ && rm -rf ~/.cargo
 
 # modify entrypoint
 COPY docker-entrypoint.sh /entrypoint.sh
