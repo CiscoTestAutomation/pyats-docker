@@ -1,5 +1,6 @@
-FROM python:3.6-alpine
-MAINTAINER pyATS Support <pyats-support-ext@cisco.com>
+FROM python:3.6-alpine AS compile-image
+LABEL maintainer="pyATS Support <pyats-support-ext@cisco.com>"
+# build container for virtualenv
 
 # workspace location
 ARG WORKSPACE
@@ -9,17 +10,10 @@ ENV WORKSPACE ${WORKSPACE:-/pyats}
 ARG PYATS_VERSION=21.5
 
 # copy wheel files into this container
-ADD src /src
+COPY src /src
 
-# 1. install common tools
-# 2. install build dependencies
-# 3. create virtual environment
-#    - install pyats
-#    - create user directory
-#    - delete added unwanted files
-# 4. cleanup
-RUN apk add --no-cache busybox-extras openssh-client \
- && apk add --no-cache --virtual .build-deps  \
+RUN apk add --no-cache busybox-extras openssh-client
+RUN apk add --no-cache --virtual .build-deps  \
 		bzip2-dev \
 		cargo \
 		coreutils \
@@ -47,14 +41,27 @@ RUN apk add --no-cache busybox-extras openssh-client \
 		tk-dev \
 		util-linux-dev \
 		xz-dev \
-		zlib-dev \
- && python3 -m venv ${WORKSPACE} \
- && ${WORKSPACE}/bin/pip install --no-cache-dir --upgrade pip setuptools wheel \
- && ${WORKSPACE}/bin/pip install --no-cache-dir /src/* \
- && mkdir ${WORKSPACE}/users && chmod 775 ${WORKSPACE}/users \
- && rm -rf /src \
- && apk del .build-deps \
- && rm -rf ~/.cargo
+		zlib-dev
+RUN python3 -m venv ${WORKSPACE}
+RUN ${WORKSPACE}/bin/pip install --no-cache-dir --upgrade pip setuptools wheel
+RUN ${WORKSPACE}/bin/pip install --no-cache-dir /src/*
+
+FROM python:3.6-alpine
+LABEL maintainer="pyATS Support <pyats-support-ext@cisco.com>"
+
+# workspace location
+ARG WORKSPACE
+ENV WORKSPACE ${WORKSPACE:-/pyats}
+
+# version definitions
+ARG PYATS_VERSION=21.5
+
+# copy virtualenv containing installed pyats packages into this image
+COPY --from=compile-image ${WORKSPACE} ${WORKSPACE}
+RUN mkdir ${WORKSPACE}/users && chmod 775 ${WORKSPACE}/users
+
+# busybox-extras needed for telnet
+RUN apk add --no-cache busybox-extras openssh-client
 
 # modify entrypoint
 COPY docker-entrypoint.sh /entrypoint.sh

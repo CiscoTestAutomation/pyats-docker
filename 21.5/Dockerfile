@@ -1,5 +1,6 @@
-FROM python:3.6-slim
-MAINTAINER pyATS Support <pyats-support-ext@cisco.com>
+FROM python:3.6-slim AS compile-image
+LABEL maintainer="pyATS Support <pyats-support-ext@cisco.com>"
+# build container for virtualenv
 
 # workspace location
 ARG WORKSPACE
@@ -8,27 +9,40 @@ ENV WORKSPACE ${WORKSPACE:-/pyats}
 # version definition
 ARG PYATS_VERSION=21.5
 
+# create virtualenv and install pyats packages
+RUN apt-get update
+RUN apt-get install -y --no-install-recommends iputils-ping telnet openssh-client curl build-essential
+RUN pip3 install --upgrade --no-cache-dir setuptools pip virtualenv
+RUN virtualenv ${WORKSPACE}
+RUN ${WORKSPACE}/bin/pip install --no-cache-dir --upgrade pip setuptools wheel
+RUN ${WORKSPACE}/bin/pip install --no-cache-dir pyats~=${PYATS_VERSION}.0 genie~=${PYATS_VERSION}.0
+
 # tini version
 ENV TINI_VERSION 0.18.0
 
-# 1. install common tools
-# 2. use tini as subreaper in Docker container to adopt zombie processes
-# 3. update packages in system python
-# 4. create virtual environment
-#    - install pyats packages
-#    - create user directory
+RUN curl -fsSL https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini-static-amd64 -o /bin/tini
+RUN chmod +x /bin/tini
+
+FROM python:3.6-slim
+LABEL maintainer="pyATS Support <pyats-support-ext@cisco.com>"
+
+# workspace location
+ARG WORKSPACE
+ENV WORKSPACE ${WORKSPACE:-/pyats}
+
+# version definition
+ARG PYATS_VERSION=21.5
+
+# copy virtualenv containing installed pyats packages into this image
+COPY --from=compile-image ${WORKSPACE} ${WORKSPACE}
+RUN mkdir ${WORKSPACE}/users && chmod 775 ${WORKSPACE}/users
+
+# use tini as subreaper in Docker container to adopt zombie processes
+COPY --from=compile-image /bin/tini /bin/tini
+
+# install common tools
 RUN apt-get update \
- && apt-get install -y --no-install-recommends iputils-ping telnet openssh-client curl build-essential\
- && curl -fsSL https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini-static-amd64 -o /bin/tini \
- && chmod +x /bin/tini \
- && pip3 install --upgrade --no-cache-dir setuptools pip virtualenv \
- && virtualenv ${WORKSPACE} \
- && ${WORKSPACE}/bin/pip install --no-cache-dir pyats~=${PYATS_VERSION}.0 genie~=${PYATS_VERSION}.0 \
- && mkdir ${WORKSPACE}/users && chmod 775 ${WORKSPACE}/users \
- && apt-get remove -y curl build-essential\
- && apt-get autoremove -y\
- && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
- && apt-get clean \
+ && apt-get install -y --no-install-recommends iputils-ping telnet openssh-client \
  && rm -rf /var/lib/apt/lists/*
 
 # modify entrypoint
