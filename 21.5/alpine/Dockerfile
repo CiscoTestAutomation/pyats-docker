@@ -1,5 +1,5 @@
-FROM python:3.6-alpine AS compile-image
-LABEL maintainer="pyATS Support <pyats-support-ext@cisco.com>"
+FROM python:3.6-alpine AS builder
+LABEL stage=builder
 # build container for virtualenv
 
 # workspace location
@@ -57,7 +57,7 @@ ENV WORKSPACE ${WORKSPACE:-/pyats}
 ARG PYATS_VERSION=21.5
 
 # copy virtualenv containing installed pyats packages into this image
-COPY --from=compile-image ${WORKSPACE} ${WORKSPACE}
+COPY --from=builder ${WORKSPACE} ${WORKSPACE}
 RUN mkdir ${WORKSPACE}/users && chmod 775 ${WORKSPACE}/users
 
 # busybox-extras needed for telnet

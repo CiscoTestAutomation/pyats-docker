@@ -1,5 +1,5 @@
-FROM python:3.6-slim AS compile-image
-LABEL maintainer="pyATS Support <pyats-support-ext@cisco.com>"
+FROM python:3.6-slim AS builder
+LABEL stage=builder
 # build container for virtualenv
 
 # workspace location
@@ -34,11 +34,11 @@ ENV WORKSPACE ${WORKSPACE:-/pyats}
 ARG PYATS_VERSION=21.5
 
 # copy virtualenv containing installed pyats packages into this image
-COPY --from=compile-image ${WORKSPACE} ${WORKSPACE}
+COPY --from=builder ${WORKSPACE} ${WORKSPACE}
 RUN mkdir ${WORKSPACE}/users && chmod 775 ${WORKSPACE}/users
 
 # use tini as subreaper in Docker container to adopt zombie processes
-COPY --from=compile-image /bin/tini /bin/tini
+COPY --from=builder /bin/tini /bin/tini
 
 # install common tools
 RUN apt-get update \
