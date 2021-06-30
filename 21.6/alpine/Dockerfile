@@ -29,7 +29,6 @@ RUN apk add --no-cache busybox-extras openssh-client \
 		gcc \
 		gdbm-dev \
 		libc-dev \
-		libressl-dev \
 		libffi-dev \
 		libnsl-dev \
 		libtirpc-dev \
