@@ -53,7 +53,7 @@ ARG WORKSPACE
 ENV WORKSPACE ${WORKSPACE:-/pyats}
 
 # version definitions
-ARG PYATS_VERSION=21.5
+ARG PYATS_VERSION=21.6
 
 # copy virtualenv containing installed pyats packages into this image
 COPY --from=builder ${WORKSPACE} ${WORKSPACE}
