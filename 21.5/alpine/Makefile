@@ -18,9 +18,10 @@ image:
 	@echo "Building the builder $(NAME):$(TAG)"
 	@echo ""
 	@test -n "$(SRC)" || (echo "SRC variable not set. Use make image SRC=/path/to/src" ; exit 1)
+	@rm -rf ./src/
 	@cp -r $(SRC) ./src
 	@docker build -t $(NAME):$(TAG) .
-	@rm -rf src/
+	@rm -rf ./src/
 	@echo ""
 	@echo "Done."
 	@echo ""
@@ -29,4 +30,4 @@ clean:
 	@echo ""
 	@echo "--------------------------------------------------------------------"
 	@echo "Deleting src filder"
-	@rm -rf src/
+	@rm -rf ./src/
