@@ -13,9 +13,6 @@ ARG PYATS_VERSION=21.6
 COPY src /src
 
 RUN apk add --no-cache busybox-extras openssh-client
-RUN apk del libressl
-RUN apk add openssl
-RUN apk fix
 RUN apk add --no-cache --virtual .build-deps  \
 		bzip2-dev \
 		cargo \
