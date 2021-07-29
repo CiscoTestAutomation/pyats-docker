@@ -47,6 +47,7 @@ RUN apt-get update \
 
 # modify entrypoint
 COPY docker-entrypoint.sh /entrypoint.sh
+RUN chmod 755 /entrypoint.sh
 ENTRYPOINT ["/bin/tini", "--", "/entrypoint.sh"]
 
 # default to python shell

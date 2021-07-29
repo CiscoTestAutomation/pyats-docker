@@ -64,6 +64,7 @@ RUN apk add --no-cache busybox-extras openssh-client
 
 # modify entrypoint
 COPY docker-entrypoint.sh /entrypoint.sh
+RUN chmod 755 /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
 # default to python shell
