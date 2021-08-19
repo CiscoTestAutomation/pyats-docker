@@ -21,6 +21,7 @@ RUN apk add --no-cache --virtual .build-deps  \
 		expat-dev \
 		findutils \
 		gcc \
+        g++ \
 		gdbm-dev \
 		libc-dev \
 		libffi-dev \
