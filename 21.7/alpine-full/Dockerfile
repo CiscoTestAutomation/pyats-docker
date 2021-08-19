@@ -26,6 +26,8 @@ RUN apk add --no-cache --virtual .build-deps  \
 		libffi-dev \
 		libnsl-dev \
 		libtirpc-dev \
+        libxml2 \
+        libxslt \
 		linux-headers \
 		make \
 		musl-dev \
