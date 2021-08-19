@@ -9,13 +9,16 @@ ENV WORKSPACE ${WORKSPACE:-/pyats}
 # version definition
 ARG PYATS_VERSION=21.7
 
+# copy wheel files into this container
+COPY src /src
+
 # create virtualenv and install pyats packages
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends iputils-ping telnet openssh-client curl build-essential
 RUN pip3 install --upgrade --no-cache-dir setuptools pip virtualenv
 RUN virtualenv ${WORKSPACE}
 RUN ${WORKSPACE}/bin/pip install --no-cache-dir --upgrade pip setuptools wheel
-RUN ${WORKSPACE}/bin/pip install --no-cache-dir pyats~=${PYATS_VERSION}.0 genie~=${PYATS_VERSION}.0
+RUN ${WORKSPACE}/bin/pip install --no-cache-dir /src/*
 
 # tini version
 ENV TINI_VERSION 0.18.0

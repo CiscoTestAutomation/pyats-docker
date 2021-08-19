@@ -43,7 +43,7 @@ RUN apk add --no-cache --virtual .build-deps  \
 		zlib-dev
 RUN python3 -m venv ${WORKSPACE}
 RUN ${WORKSPACE}/bin/pip install --no-cache-dir --upgrade pip setuptools wheel
-RUN PYATS_WHL=`ls /src/pyats-* | head -n 1` && ${WORKSPACE}/bin/pip install --no-cache-dir "$PYATS_WHL[full]" /src/*
+RUN ${WORKSPACE}/bin/pip install --no-cache-dir /src/*
 
 FROM python:3.6-alpine
 LABEL maintainer="pyATS Support <pyats-support-ext@cisco.com>"
