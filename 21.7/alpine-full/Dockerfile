@@ -16,6 +16,7 @@ RUN apk add --no-cache busybox-extras openssh-client
 RUN apk add --no-cache --virtual .build-deps  \
 		bzip2-dev \
 		cargo \
+        cmake \
 		coreutils \
 		dpkg-dev dpkg \
 		expat-dev \
