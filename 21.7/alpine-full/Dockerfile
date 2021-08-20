@@ -49,7 +49,7 @@ RUN apk add --no-cache --virtual .build-deps  \
 RUN python3 -m venv ${WORKSPACE}
 RUN ${WORKSPACE}/bin/pip install --no-cache-dir --upgrade pip setuptools wheel
 
-RUN SODIUM_INSTALL=${WORKSPACE}/bin/pip install pynacl
+RUN SODIUM_INSTALL=system ${WORKSPACE}/bin/pip install pynacl
 
 RUN ${WORKSPACE}/bin/pip install --no-cache-dir /src/*
 
