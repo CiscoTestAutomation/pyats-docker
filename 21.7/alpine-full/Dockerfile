@@ -46,7 +46,7 @@ RUN apk add --no-cache --virtual .build-deps  \
 		xz-dev \
 		zlib-dev
 RUN python3 -m venv ${WORKSPACE}
-RUN ${WORKSPACE}/bin/pip install --no-cache-dir --upgrade pip setuptools wheel
+RUN ${WORKSPACE}/bin/pip install --no-cache-dir --upgrade pip setuptools wheel pynacl
 RUN ${WORKSPACE}/bin/pip install --no-cache-dir /src/*
 
 FROM python:3.6-alpine
