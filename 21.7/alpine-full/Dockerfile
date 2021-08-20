@@ -27,6 +27,7 @@ RUN apk add --no-cache --virtual .build-deps  \
 		libc-dev \
 		libffi-dev \
 		libnsl-dev \
+        libsodium \
 		libtirpc-dev \
         libxml2-dev \
         libxslt-dev \
@@ -47,7 +48,9 @@ RUN apk add --no-cache --virtual .build-deps  \
 		zlib-dev
 RUN python3 -m venv ${WORKSPACE}
 RUN ${WORKSPACE}/bin/pip install --no-cache-dir --upgrade pip setuptools wheel
-RUN ${WORKSPACE}/bin/pip install --no-cache-dir pynacl --no-use-pep517
+
+RUN SODIUM_INSTALL=${WORKSPACE}/bin/pip install pynacl
+
 RUN ${WORKSPACE}/bin/pip install --no-cache-dir /src/*
 
 FROM python:3.6-alpine
