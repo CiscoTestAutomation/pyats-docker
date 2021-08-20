@@ -37,6 +37,7 @@ RUN apk add --no-cache --virtual .build-deps  \
 		ncurses-dev \
 		openssl-dev \
 		pax-utils \
+        py3-pynacl \
 		readline-dev \
 		rust \
 		sqlite-dev \
@@ -48,9 +49,6 @@ RUN apk add --no-cache --virtual .build-deps  \
 		zlib-dev
 RUN python3 -m venv ${WORKSPACE}
 RUN ${WORKSPACE}/bin/pip install --no-cache-dir --upgrade pip setuptools wheel
-
-RUN SODIUM_INSTALL=system ${WORKSPACE}/bin/pip install pynacl
-
 RUN ${WORKSPACE}/bin/pip install --no-cache-dir /src/*
 
 FROM python:3.6-alpine
