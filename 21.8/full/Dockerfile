@@ -7,7 +7,7 @@ ARG WORKSPACE
 ENV WORKSPACE ${WORKSPACE:-/pyats}
 
 # version definition
-ARG PYATS_VERSION=21.7
+ARG PYATS_VERSION=21.8
 
 # copy wheel files into this container
 COPY src /src
@@ -34,7 +34,7 @@ ARG WORKSPACE
 ENV WORKSPACE ${WORKSPACE:-/pyats}
 
 # version definition
-ARG PYATS_VERSION=21.7
+ARG PYATS_VERSION=21.8
 
 # copy virtualenv containing installed pyats packages into this image
 COPY --from=builder ${WORKSPACE} ${WORKSPACE}
