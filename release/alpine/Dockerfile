@@ -7,7 +7,7 @@ ARG WORKSPACE
 ENV WORKSPACE ${WORKSPACE:-/pyats}
 
 # version definitions
-ARG PYATS_VERSION=21.8
+ARG pyats_version
 
 # copy wheel files into this container
 COPY src /src
@@ -16,28 +16,22 @@ RUN apk add --no-cache busybox-extras openssh-client
 RUN apk add --no-cache --virtual .build-deps  \
 		bzip2-dev \
 		cargo \
-		cmake \
 		coreutils \
 		dpkg-dev dpkg \
 		expat-dev \
 		findutils \
 		gcc \
-		g++ \
 		gdbm-dev \
 		libc-dev \
 		libffi-dev \
 		libnsl-dev \
-		libsodium \
 		libtirpc-dev \
-		libxml2-dev \
-		libxslt-dev \
 		linux-headers \
 		make \
 		musl-dev \
 		ncurses-dev \
 		openssl-dev \
 		pax-utils \
-		py3-pynacl \
 		readline-dev \
 		rust \
 		sqlite-dev \
@@ -59,7 +53,7 @@ ARG WORKSPACE
 ENV WORKSPACE ${WORKSPACE:-/pyats}
 
 # version definitions
-ARG PYATS_VERSION=21.8
+ARG pyats_version
 
 # copy virtualenv containing installed pyats packages into this image
 COPY --from=builder ${WORKSPACE} ${WORKSPACE}
