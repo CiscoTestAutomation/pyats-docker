@@ -16,28 +16,28 @@ RUN apk add --no-cache busybox-extras openssh-client
 RUN apk add --no-cache --virtual .build-deps  \
 		bzip2-dev \
 		cargo \
-        cmake \
+		cmake \
 		coreutils \
 		dpkg-dev dpkg \
 		expat-dev \
 		findutils \
 		gcc \
-        g++ \
+		g++ \
 		gdbm-dev \
 		libc-dev \
 		libffi-dev \
 		libnsl-dev \
-        libsodium \
+		libsodium \
 		libtirpc-dev \
-        libxml2-dev \
-        libxslt-dev \
+		libxml2-dev \
+		libxslt-dev \
 		linux-headers \
 		make \
 		musl-dev \
 		ncurses-dev \
 		openssl-dev \
 		pax-utils \
-        py3-pynacl \
+		py3-pynacl \
 		readline-dev \
 		rust \
 		sqlite-dev \
