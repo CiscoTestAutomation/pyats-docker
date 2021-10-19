@@ -1,4 +1,4 @@
-FROM python:3.6-slim AS builder
+FROM python:3.8-slim AS builder
 LABEL stage=builder
 # build container for virtualenv
 
