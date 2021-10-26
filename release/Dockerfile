@@ -46,7 +46,7 @@ COPY --from=builder /bin/tini /bin/tini
 
 # install common tools
 RUN apt-get update \
- && apt-get install -y --no-install-recommends iputils-ping telnet openssh-client \
+ && apt-get install -y --no-install-recommends iputils-ping telnet openssh-client git \
  && rm -rf /var/lib/apt/lists/*
 
 # modify entrypoint
