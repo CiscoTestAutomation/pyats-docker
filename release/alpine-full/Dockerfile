@@ -66,7 +66,7 @@ COPY --from=builder ${WORKSPACE} ${WORKSPACE}
 RUN mkdir ${WORKSPACE}/users && chmod 775 ${WORKSPACE}/users
 
 # busybox-extras needed for telnet
-RUN apk add --no-cache busybox-extras openssh-client
+RUN apk add --no-cache busybox-extras openssh-client git
 
 # modify entrypoint
 COPY docker-entrypoint.sh /entrypoint.sh
