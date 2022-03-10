@@ -1,4 +1,4 @@
-FROM python:3.8-alpine AS builder
+FROM python:3.9-alpine AS builder
 LABEL stage=builder
 # build container for virtualenv
 
@@ -45,7 +45,7 @@ RUN python3 -m venv ${WORKSPACE}
 RUN ${WORKSPACE}/bin/pip install --no-cache-dir --upgrade pip setuptools wheel
 RUN ${WORKSPACE}/bin/pip install --no-cache-dir /src/*
 
-FROM python:3.8-alpine
+FROM python:3.9-alpine
 LABEL maintainer="pyATS Support <pyats-support-ext@cisco.com>"
 
 # workspace location
