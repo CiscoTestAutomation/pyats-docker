@@ -1,4 +1,4 @@
-FROM python:3.8-slim AS builder
+FROM python:3.9-slim AS builder
 LABEL stage=builder
 # build container for virtualenv
 
@@ -26,7 +26,7 @@ ENV TINI_VERSION 0.18.0
 RUN curl -fsSL https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini-static-amd64 -o /bin/tini
 RUN chmod +x /bin/tini
 
-FROM python:3.8-slim
+FROM python:3.9-slim
 LABEL maintainer="pyATS Support <pyats-support-ext@cisco.com>"
 
 # workspace location
