@@ -25,6 +25,7 @@ RUN apk add --no-cache --virtual .build-deps  \
 		libc-dev \
 		libffi-dev \
 		libnsl-dev \
+		libstdc++ \
 		libtirpc-dev \
 		linux-headers \
 		make \
