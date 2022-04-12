@@ -29,7 +29,7 @@ RUN apk add --no-cache --virtual .build-deps  \
 		libnsl-dev \
 		libsodium \
 		libtirpc-dev \
-        libstdc++ \
+		libstdc++ \
 		libxml2-dev \
 		libxslt-dev \
 		linux-headers \
