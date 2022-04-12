@@ -28,6 +28,7 @@ RUN apk add --no-cache --virtual .build-deps  \
 		libffi-dev \
 		libnsl-dev \
 		libsodium \
+		libstdc++ \
 		libtirpc-dev \
 		libxml2-dev \
 		libxslt-dev \
