@@ -28,8 +28,8 @@ RUN apk add --no-cache --virtual .build-deps  \
 		libffi-dev \
 		libnsl-dev \
 		libsodium \
-		libtirpc-dev \
 		libstdc++ \
+		libtirpc-dev \
 		libxml2-dev \
 		libxslt-dev \
 		linux-headers \
@@ -50,7 +50,7 @@ RUN apk add --no-cache --virtual .build-deps  \
 		zlib-dev
 RUN python3 -m venv ${WORKSPACE}
 RUN ${WORKSPACE}/bin/pip install --no-cache-dir --upgrade pip setuptools wheel
-RUN ${WORKSPACE}/bin/pip install --no-cache-dir /src/*
+RUN find /src -iname "*${pyats_version}*.whl" -execdir sh -c 'package={}; pip install --no-cache-dir "$package==${pyats_version}"' \;
 
 FROM python:3.9-alpine
 LABEL maintainer="pyATS Support <pyats-support-ext@cisco.com>"
