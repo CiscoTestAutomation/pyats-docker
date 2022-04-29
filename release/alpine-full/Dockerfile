@@ -66,6 +66,8 @@ ARG pyats_version
 COPY --from=builder ${WORKSPACE} ${WORKSPACE}
 RUN mkdir ${WORKSPACE}/users && chmod 775 ${WORKSPACE}/users
 
+RUN apk add libstdc++
+
 # busybox-extras needed for telnet
 RUN apk add --no-cache busybox-extras openssh-client git
 
