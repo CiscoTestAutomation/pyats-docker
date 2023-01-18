@@ -1,4 +1,4 @@
-FROM arm64v8/ubuntu as builder
+FROM arm64v8/python:3.9 as builder
 LABEL stage=builder
 
 # workspace location
@@ -14,7 +14,7 @@ COPY src /src
 
 # create virtualenv and install pyats packages
 RUN apt-get update
-RUN apt-get install -y python3 virtualenv python3-venv build-essential
+RUN apt-get install -y build-essential
 RUN pip3 install --upgrade --no-cache-dir pip setuptools wheel
 RUN virtualenv ${WORKSPACE}
 RUN ${WORKSPACE}/bin/pip install --no-cache-dir /src/*
@@ -25,7 +25,7 @@ ENV TINI_VERSION 0.18.0
 RUN curl -fsSL https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini-static-arm64 -o /bin/tini
 RUN chmod +x /bin/tini
 
-FROM arm64v8/python:3.10
+FROM arm64v8/python:3.9
 LABEL maintainer="pyATS Support <pyats-support-ext@cisco.com>"
 
 # workspace location
