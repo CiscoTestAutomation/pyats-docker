@@ -14,7 +14,7 @@ COPY src /src
 
 # create virtualenv and install pyats packages
 RUN apt-get update
-RUN apt-get install -y build-essential
+RUN apt-get install -y build-essential virtualenv
 RUN pip3 install --upgrade --no-cache-dir pip setuptools wheel
 RUN virtualenv ${WORKSPACE}
 RUN ${WORKSPACE}/bin/pip install --no-cache-dir /src/*
