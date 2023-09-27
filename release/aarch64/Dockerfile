@@ -10,14 +10,14 @@ ARG pyats_version
 RUN echo "Building $pyats_version"
 
 # copy wheel files into this container
-COPY src /src
+ADD src /src
 
 # create virtualenv and install pyats packages
 RUN apt-get update
 RUN apt-get install -y build-essential virtualenv
 RUN pip3 install --upgrade --no-cache-dir pip setuptools wheel
 RUN virtualenv ${WORKSPACE}
-RUN ${WORKSPACE}/bin/pip install --no-cache-dir /src/*
+RUN pip3 install --no-cache-dir /src/*
 
 # tini version
 ENV TINI_VERSION 0.18.0
