@@ -17,7 +17,7 @@ RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install -y build-essential virtualenv
 RUN virtualenv ${WORKSPACE}
-RUN ${WORKSPACE}/bin/pip --upgrade --no-cache-dir pip setuptools wheel
+RUN ${WORKSPACE}/bin/pip install --upgrade --no-cache-dir pip setuptools wheel
 RUN ${WORKSPACE}/bin/pip install --no-cache-dir /src/*
 
 # tini version
