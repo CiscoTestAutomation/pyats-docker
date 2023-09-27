@@ -1,4 +1,4 @@
-FROM arm64v8/python:3.9 as builder
+FROM arm64v8/python:3.10 as builder
 LABEL stage=builder
 
 # workspace location
@@ -15,9 +15,9 @@ ADD src /src
 # create virtualenv and install pyats packages
 RUN apt-get update
 RUN apt-get install -y build-essential virtualenv
-RUN pip3 install --upgrade --no-cache-dir pip setuptools wheel
 RUN virtualenv ${WORKSPACE}
-RUN pip3 install --no-cache-dir /src/*
+RUN ${WORKSPACE}/bin/pip install --upgrade --no-cache-dir pip setuptools wheel
+RUN ${WORKSPACE}/bin/pip --no-cache-dir /src/*
 
 # tini version
 ENV TINI_VERSION 0.18.0
