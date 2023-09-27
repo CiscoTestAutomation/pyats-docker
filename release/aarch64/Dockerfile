@@ -1,4 +1,4 @@
-FROM arm64v8/python:3.9.16 as builder
+FROM arm64v8/python:3.9.15 as builder
 LABEL stage=builder
 
 # workspace location
@@ -16,8 +16,8 @@ COPY src /src
 RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install -y build-essential virtualenv
-RUN pip3 install --upgrade --no-cache-dir pip setuptools wheel
 RUN virtualenv ${WORKSPACE}
+RUN ${WORKSPACE}/bin/pip --upgrade --no-cache-dir pip setuptools wheel
 RUN ${WORKSPACE}/bin/pip install --no-cache-dir /src/*
 
 # tini version
@@ -26,7 +26,7 @@ ENV TINI_VERSION 0.18.0
 RUN curl -fsSL https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini-static-arm64 -o /bin/tini
 RUN chmod +x /bin/tini
 
-FROM arm64v8/python:3.9.16
+FROM arm64v8/python:3.9.15
 LABEL maintainer="pyATS Support <pyats-support-ext@cisco.com>"
 
 # workspace location
