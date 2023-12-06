@@ -1,4 +1,4 @@
-FROM arm64v8/python:3.9 as builder
+FROM arm64v8/python:3.11 as builder
 LABEL stage=builder
 
 # workspace location
@@ -25,7 +25,7 @@ ENV TINI_VERSION 0.18.0
 RUN curl -fsSL https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini-static-arm64 -o /bin/tini
 RUN chmod +x /bin/tini
 
-FROM arm64v8/python:3.9
+FROM arm64v8/python:3.11
 LABEL maintainer="pyATS Support <pyats-support-ext@cisco.com>"
 
 # workspace location
